@@ -14,7 +14,7 @@ export default defineCachedEventHandler(
     let image: string
     if (type == "mbid") {
       const spotifyID = await getSpotifyArtistIDFromMBID(artist)
-      image = await getSpotifyArtistImageFromArtistID(spotifyID!)
+      image = spotifyID ? await getSpotifyArtistImageFromArtistID(spotifyID) : "https://itswilli.dev/milo.jpg"
     } else image = await getSpotifyArtistImageFromName(artist)
 
     return {

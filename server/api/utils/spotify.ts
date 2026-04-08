@@ -124,5 +124,5 @@ export async function getSpotifyArtistImageFromArtistID(id: string) {
     })
   )
 
-  return resp.images[1]?.url ?? null
+  return resp.images[1]?.url ?? "https://itswilli.dev/milo.jpg"
 }
