@@ -20,22 +20,17 @@ export default defineCachedEventHandler(
 
     const artists = await getTopArtists(clamped)
 
-    const enriched = await Promise.all(
-      artists.map(async (artist: Artist) => {
-        const type = artist.mbid != "" ? "mbid" : "name"
-        const resp = await $fetch<{ artist: string; type: string; image: string | null }>("/api/spotify/artist-image", {
-          query: {
-            q: artist.mbid || artist.name,
-            type
-          }
-        })
-
-        return {
-          ...artist,
-          resolvedImage: resp.image
+    const enriched: Artist[] = []
+    for (const artist of artists) {
+      const type = artist.mbid != "" ? "mbid" : "name"
+      const resp = await $fetch<{ artist: string; type: string; image: string | null }>("/api/spotify/artist-image", {
+        query: {
+          q: artist.mbid || artist.name,
+          type
         }
       })
-    )
+      enriched.push({ ...artist, resolvedImage: resp.image as string })
+    }
 
     return enriched.slice(0, clamped) as Artist[]
   },

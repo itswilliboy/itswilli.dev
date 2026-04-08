@@ -20,21 +20,16 @@ export default defineCachedEventHandler(
 
     const tracks = await getRecentTracks(clamped)
 
-    const enriched = await Promise.all(
-      tracks.map(async (track: Track) => {
-        const resp = await $fetch<{ track: string; type: string; image: string }>("/api/spotify/track-image", {
-          query: {
-            q: track.name,
-            artist: track.artist.name
-          }
-        })
-
-        return {
-          ...track,
-          resolvedImage: resp.image
+    const enriched: Track[] = []
+    for (const track of tracks) {
+      const resp = await $fetch<{ track: string; type: string; image: string }>("/api/spotify/track-image", {
+        query: {
+          q: track.name,
+          artist: track.artist.name
         }
       })
-    )
+      enriched.push({ ...track, resolvedImage: resp.image })
+    }
 
     return enriched.slice(0, clamped)
   },
