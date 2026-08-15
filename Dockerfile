@@ -10,8 +10,9 @@ RUN bun run build
 FROM oven/bun:1.3.9 AS run
 WORKDIR /app
 
-COPY --from=build /app/.output ./.output
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
 
 ENV PORT=3000
 ENV HOST=0.0.0.0
-CMD ["bun", "run", ".output/server/index.mjs"]
+CMD ["bun", "run", "./dist/server/entry.mjs"]

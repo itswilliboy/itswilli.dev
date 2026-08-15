@@ -1,0 +1,51 @@
+---
+import "../styles/main.css"
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const { title = "itswilli.dev", description } = Astro.props
+
+const site = "https://itswilli.dev"
+const ogImage = `${site}/milo.jpg`
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+
+    {description && <meta name="description" content={description} />}
+    <meta name="theme-color" content="#a06bff" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, site).href} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body class="flex flex-col">
+    <main class="flex flex-1 flex-col">
+      <slot />
+    </main>
+
+    <footer class="text-faint px-4 py-6 text-center text-sm font-normal">
+      Built with Astro & Vue &ndash;&nbsp;
+      <a
+        href="https://github.com/itswilliboy/itswilli.vue"
+        target="_blank"
+        class="text-primary/80 hover:text-primary transition-colors"
+      >
+        source
+      </a>
+    </footer>
+  </body>
+</html>

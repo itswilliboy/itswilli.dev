@@ -1,0 +1,8 @@
+node_modules
+dist
+.astro
+.cache
+.git
+.env
+.env.*
+!.env.example

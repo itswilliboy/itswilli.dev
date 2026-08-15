@@ -1,0 +1,56 @@
+---
+import Base from "../../layouts/Base.astro"
+
+const items = [
+  {
+    title: "What sensitive information do we (Harmony) store?",
+    value: `
+        If the user is using our AniList-integration by logging in using their AniList account,
+        the user's OAuth2 access token will be stored from the time of the successful login, to the time of logging out.
+        ~~When the user logs out, all login-related information is deleted permanently until the next login.
+      `
+  },
+  {
+    title: "How do we use the aforementioned information?",
+    value: `
+      We solely use the user's OAuth2 access token to make requests on their behalf to the AniList API.
+      All sent requests require user interaction.
+      ~~All requests are read-only, meaning no requests are sent to write data on behalf of the user.
+    `
+  },
+  {
+    title: "Do we share any sensitive data with 3rd-party sources?",
+    value: "No."
+  }
+]
+---
+
+<Base title="itswilli - privacy policy">
+  <div class="bg-background flex h-screen w-full items-center justify-center">
+    <div class="bg-surface flex h-5/6 w-75 flex-col overflow-y-auto rounded-lg text-white md:w-125">
+      <div class="flex h-24 flex-col items-center justify-center py-4 md:py-0">
+        <a href="/bot" class="hover:underline">
+          <h1 class="text-2xl font-semibold md:text-4xl">Harmony Privacy Policy</h1>
+        </a>
+      </div>
+      <div class="flex justify-center">
+        <div class="w-4/5 rounded-lg border-2 border-border"></div>
+      </div>
+      <div class="flex-1 px-10 py-8">
+        <ul class="space-y-4">
+          {
+            items.map(item => (
+              <li>
+                <div class="flex flex-col gap-2">
+                  <h2 class="text-md font-semibold underline md:text-2xl">{item.title}</h2>
+                  <p set:html={item.value.replaceAll("~", "<br />")} />
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <p class="pb-2 text-center text-muted">Harmony is not affiliated with AniList.</p>
+    </div>
+  </div>
+</Base>
