@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "@fontsource-variable/noto-sans-jp";
+
+@theme {
+  --color-background: #0c0718;
+  --color-primary: #a06bff;
+  --color-secondary: #4a2a8f;
+  --color-accent: #e85cff;
+  --color-light-bg: #1a1130;
+  --default-font-family: "Noto Sans JP Variable", "sans-serif";
+
+  --breakpoint-3xl: 120rem;
+}

@@ -1,0 +1,108 @@
+---
+import Friends from "../components/Friends.vue"
+import NowPlaying from "../components/NowPlaying.vue"
+import Project from "../components/Project.astro"
+import Tooltip from "../components/Tooltip.vue"
+import Base from "../layouts/Base.astro"
+import type { Friend, Project as ProjectType } from "../types"
+
+const socials = [
+  {
+    href: "https://discord.com/users/263602820496883712",
+    name: "discord"
+  },
+  {
+    href: "https://github.com/itswilliboy",
+    name: "github"
+  }
+]
+
+const projects: ProjectType[] = [
+  {
+    name: "Harmony",
+    description: "Harmony is a multipurpose Discord Bot built in Python using discord.py",
+    href: "https://github.com/itswilliboy/Harmony",
+    colour: "#3573A6",
+    icon: "skill-icons:python-dark"
+  },
+  {
+    name: "itswilli.vue",
+    description: "This site. Built with Astro and Vue using TailwindCSS",
+    href: "https://github.com/itswilliboy/itswilli.vue",
+    colour: "#BC52EE",
+    icon: "skill-icons:astro"
+  },
+  {
+    name: "meteorite",
+    description: "A small image host written in Go, available at i.itswilli.dev",
+    href: "https://github.com/itswilliboy/meteorite",
+    colour: "#00ADD8",
+    icon: "skill-icons:golang"
+  }
+]
+
+const friends: Friend[] = [
+  {
+    name: "Faaz",
+    href: "https://faaz.dev",
+    githubID: 70286349
+  },
+  {
+    name: "Dep",
+    href: "https://deppie-dev.vercel.app",
+    githubID: 70801324
+  },
+  {
+    name: "Vahin",
+    href: "https://vahin.dev",
+    githubID: 66386770
+  }
+]
+
+const linkClass = "text-primary/80 hover:text-primary font-normal transition-colors"
+---
+
+<Base>
+  <Friends client:load friends={friends} class="absolute top-4 right-4" />
+
+  <div class="bg-background flex min-h-screen w-screen justify-center pb-8 font-semibold text-white">
+    <div class="flex flex-col">
+      <div class="mt-32 flex flex-row justify-center">
+        <div class="flex flex-col justify-center">
+          <h2 class="text-md md:text-2xl">Hello, I am</h2>
+          <h1 class="text-primary text-[6rem] leading-[.7] font-bold md:text-[10rem]">Willi</h1>
+
+          <div class="flex items-center gap-1 pt-6 pl-4 text-sm">
+            {
+              socials.map((social, index) => (
+                <>
+                  {index > 0 && <span class="text-white/40">&centerdot;</span>}
+                  <a href={social.href} target="_blank" class={linkClass}>
+                    {social.name}
+                  </a>
+                </>
+              ))
+            }
+          </div>
+        </div>
+
+        <Tooltip client:load text="Yes, it's my cat...">
+          <img class="ml-6 h-32 w-32 rounded-lg md:h-64 md:w-64" src="/milo.jpg" alt="pfp" />
+        </Tooltip>
+      </div>
+
+      <div class="mt-8 flex flex-col items-center justify-center gap-6">
+        <NowPlaying client:load />
+      </div>
+
+      <div class="mt-8 flex flex-col items-center justify-center gap-4 overflow-y-auto lg:flex-row">
+        {projects.map(project => <Project project={project} />)}
+      </div>
+
+      <p class="mt-12 text-center text-sm font-normal text-white/40">
+        Built with Astro & Vue &ndash;&nbsp;
+        <a href="https://github.com/itswilliboy/itswilli.vue" target="_blank" class={linkClass}>source</a>
+      </p>
+    </div>
+  </div>
+</Base>

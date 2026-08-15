@@ -1,36 +1,36 @@
 {
-  "name": "nuxt-app",
+  "name": "itswilli",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^11.1.2",
+    "@astrojs/vue": "^7.0.2",
     "@fontsource-variable/noto-sans-jp": "^5.2.9",
-    "@highlightjs/vue-plugin": "^2.1.0",
-    "@nuxt/icon": "^2.2.1",
-    "@nuxt/image": "^2.0.0",
+    "@iconify-json/skill-icons": "^1.2.0",
     "@tailwindcss/vite": "^4.1.17",
-    "@types/node": "^25.3.5",
-    "baseline-browser-mapping": "^2.9.6",
-    "caniuse-lite": "^1.0.30001760",
+    "astro": "^7.2.2",
+    "astro-icon": "^1.1.5",
     "date-fns": "^4.1.0",
-    "highlight.js": "^11.11.1",
-    "nuxt": "^4.2.2",
     "tailwindcss": "^4.1.17",
-    "vue": "^3.5.25",
-    "vue-router": "^4.6.3"
+    "vue": "^3.5.25"
   },
   "devDependencies": {
+    "@types/node": "^25.3.5",
     "prettier": "^3.7.4",
-    "prettier-plugin-tailwindcss": "^0.6.14"
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "typescript": "^5.9.0"
   },
   "trustedDependencies": [
     "@parcel/watcher",
-    "@tailwindcss/oxide"
+    "@tailwindcss/oxide",
+    "esbuild",
+    "sharp"
   ]
 }

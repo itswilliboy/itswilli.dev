@@ -7,4 +7,4 @@ useTabs = false
 trailingComma = "none"
 printWidth = 125
 htmlWhitespaceSensitivity = "ignore"
-plugins = ["prettier-plugin-tailwindcss"]
+plugins = ["prettier-plugin-astro", "prettier-plugin-tailwindcss"]

@@ -1,5 +1,5 @@
 services:
-  nuxt:
+  astro:
     build:
       context: .
     ports:
