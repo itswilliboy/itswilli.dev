@@ -3,6 +3,6 @@ services:
     build:
       context: .
     ports:
-      - 3007:3000
+      - ${ASTRO_PORT:-3007}:3000
     env_file:
       - .env
