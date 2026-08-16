@@ -10,7 +10,7 @@ const { project } = Astro.props
 ---
 
 <a
-  class="group bg-surface border-border/60 relative min-h-28 w-72 overflow-hidden rounded-lg border pb-3 shadow-lg shadow-black/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface-raised hover:shadow-xl hover:shadow-black/40 focus-visible:outline-2 focus-visible:outline-primary motion-reduce:hover:translate-y-0"
+  class="group bg-surface border-border/60 hover:bg-surface-raised focus-visible:outline-primary relative min-h-28 w-72 overflow-hidden rounded-lg border pb-3 shadow-lg shadow-black/20 transition-[background-color,box-shadow,transform] duration-200 will-change-transform hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/40 focus-visible:outline-2"
   href={project.href}
   target="_blank">
   <div class="flex items-center justify-between px-3 pt-3">
