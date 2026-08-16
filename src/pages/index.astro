@@ -8,12 +8,12 @@ import type { Friend, Project as ProjectType } from "../types"
 
 const socials = [
   {
-    href: "https://discord.com/users/263602820496883712",
-    name: "discord"
-  },
-  {
     href: "https://github.com/itswilliboy",
     name: "github"
+  },
+  {
+    href: "https://discord.com/users/263602820496883712",
+    name: "discord"
   }
 ]
 
@@ -56,28 +56,49 @@ const friends: Friend[] = [
     name: "Vahin",
     href: "https://vahin.dev",
     githubID: 66386770
+  },
+  {
+    name: "Leo",
+    href: "https://leo.might-be.gay",
+    githubID: 13399568
   }
 ]
-
-const linkClass = "text-primary/80 hover:text-primary font-normal transition-colors"
 ---
 
 <Base>
-  <Friends client:load friends={friends} class="absolute top-4 right-4" />
-
-  <div class="bg-background flex min-h-screen w-screen justify-center pb-8 font-semibold text-white">
+  <div class="flex w-full flex-1 flex-col items-center justify-center px-4 py-12 font-semibold text-white">
     <div class="flex flex-col">
-      <div class="mt-32 flex flex-row justify-center">
-        <div class="flex flex-col justify-center">
-          <h2 class="text-md md:text-2xl">Hello, I am</h2>
-          <h1 class="text-primary text-[6rem] leading-[.7] font-bold md:text-[10rem]">Willi</h1>
+      <div class="flex flex-col items-center justify-center md:flex-row md:gap-0">
+        <div class="relative flex flex-col items-center justify-center md:items-start">
+          <img
+            src="/milo.jpg"
+            alt=""
+            aria-hidden="true"
+            class="pointer-events-none absolute top-1/2 left-1/2 h-56 w-72 -translate-x-1/2 -translate-y-1/2 object-cover opacity-20 md:hidden"
+            style="
+              -webkit-mask-image:
+                linear-gradient(to right, transparent 0%, black 38%, black 62%, transparent 100%),
+                linear-gradient(to bottom, transparent 0%, black 38%, black 62%, transparent 100%);
+              mask-image:
+                linear-gradient(to right, transparent 0%, black 38%, black 62%, transparent 100%),
+                linear-gradient(to bottom, transparent 0%, black 38%, black 62%, transparent 100%);
+              -webkit-mask-composite: source-in;
+              mask-composite: intersect;
+            "
+          />
 
-          <div class="flex items-center gap-1 pt-6 pl-4 text-sm">
+          <h2 class="text-muted relative mb-3 text-lg md:mb-0 md:text-2xl">Hello, I am</h2>
+          <h1 class="text-primary relative text-[6rem] leading-[.7] font-bold md:text-[10rem]">Willi</h1>
+
+          <div class="relative flex items-center gap-1 pt-6 text-sm md:pl-4">
             {
               socials.map((social, index) => (
                 <>
-                  {index > 0 && <span class="text-white/40">&centerdot;</span>}
-                  <a href={social.href} target="_blank" class={linkClass}>
+                  {index > 0 && <span class="text-faint">&centerdot;</span>}
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    class="text-primary/80 hover:text-primary font-normal transition-colors">
                     {social.name}
                   </a>
                 </>
@@ -86,23 +107,24 @@ const linkClass = "text-primary/80 hover:text-primary font-normal transition-col
           </div>
         </div>
 
-        <Tooltip client:load text="Yes, it's my cat...">
-          <img class="ml-6 h-32 w-32 rounded-lg md:h-64 md:w-64" src="/milo.jpg" alt="pfp" />
-        </Tooltip>
+        <div class="hidden md:block">
+          <Tooltip client:load text="Yes, it's my cat..." focusable>
+            <img
+              class="ml-6 h-64 w-64 rounded-lg object-cover"
+              src="/milo.jpg"
+              alt="Milo, a ragdoll cat, chewing on a houseplant"
+            />
+          </Tooltip>
+        </div>
       </div>
 
-      <div class="mt-8 flex flex-col items-center justify-center gap-6">
-        <NowPlaying client:load />
-      </div>
+      <NowPlaying client:load class="mx-auto mt-8 block w-72 md:absolute md:top-24 md:right-4 md:mx-0 md:mt-0" />
 
-      <div class="mt-8 flex flex-col items-center justify-center gap-4 overflow-y-auto lg:flex-row">
+      <div class="mt-8 flex flex-col items-center justify-center gap-4 lg:flex-row">
         {projects.map(project => <Project project={project} />)}
       </div>
 
-      <p class="mt-12 text-center text-sm font-normal text-white/40">
-        Built with Astro & Vue &ndash;&nbsp;
-        <a href="https://github.com/itswilliboy/itswilli.vue" target="_blank" class={linkClass}>source</a>
-      </p>
+      <Friends client:load friends={friends} class="mt-8 self-center md:absolute md:top-4 md:right-4 md:mt-0" />
     </div>
   </div>
 </Base>

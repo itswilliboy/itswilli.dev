@@ -2,12 +2,29 @@
 @import "@fontsource-variable/noto-sans-jp";
 
 @theme {
-  --color-background: #0c0718;
+  --color-background: #0d0918;
+  --color-surface: #191033;
+  --color-surface-raised: #241748;
+  --color-border: #33215e;
+
   --color-primary: #a06bff;
-  --color-secondary: #4a2a8f;
-  --color-accent: #e85cff;
-  --color-light-bg: #1a1130;
+  --color-primary-dim: #6f52c4;
+
+  --color-muted: #a396c4;
+  --color-faint: #6f6390;
+
   --default-font-family: "Noto Sans JP Variable", "sans-serif";
 
   --breakpoint-3xl: 120rem;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-background);
+  background-image: radial-gradient(
+    ellipse 95% 50% at 50% 0%,
+    color-mix(in oklab, var(--color-primary) 9%, transparent),
+    transparent 75%
+  );
+  background-repeat: no-repeat;
 }

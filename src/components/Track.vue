@@ -25,20 +25,22 @@ useIntervalFn(() => {
 
 <template>
   <a :href="LAST_FM_PROFILE" target="_blank">
-    <div class="relative h-28 w-72 rounded-lg transition-colors hover:bg-white/15" :style="`--img: url(${image})`">
+    <div
+      class="bg-surface border-border/60 hover:bg-surface-raised relative h-28 w-72 rounded-lg border transition-colors"
+      :style="`--img: url(${image})`">
       <div class="absolute right-0 mt-2 mr-3 flex h-5 items-end gap-0.75" v-if="isCurrent" aria-label="Now playing">
         <span v-for="bar in 3" :key="bar" class="bg-primary w-0.75 rounded-full" />
       </div>
-      <p v-else class="absolute right-0 mt-2 mr-3 font-bold text-white/50">{{ relative.replace("about", "") }}</p>
+      <p v-else class="text-faint absolute right-0 mt-2 mr-3 font-bold">{{ relative.replace("about", "") }}</p>
       <div class="flex h-full w-full items-center gap-4 px-4">
-        <img :src="image" class="rounded-lg" width="80" height="80" />
+        <img :src="image" :alt="`${track.name} album art`" class="rounded-lg" width="80" height="80" />
         <div class="flex flex-col justify-center">
           <Tooltip :text="track.name">
-            <h1 class="line-clamp-1 text-lg font-semibold break-all">
+            <p class="line-clamp-1 text-lg font-semibold break-all">
               {{ track.name }}
-            </h1>
+            </p>
           </Tooltip>
-          <h2 class="text-sm">{{ track.artist["#text"]?.replace("Lisa", "LiSA") }}</h2>
+          <p class="text-muted text-sm">{{ track.artist["#text"]?.replace("Lisa", "LiSA") }}</p>
           <!-- :^) -->
         </div>
       </div>

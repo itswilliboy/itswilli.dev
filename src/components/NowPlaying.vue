@@ -22,5 +22,5 @@ useIntervalFn(refresh, 60_000)
 
 <template>
   <Track v-if="track" :track="track" :key="`${track.name}:${track.date.uts}`" />
-  <div v-else class="bg-light-bg h-28 w-72 animate-pulse rounded-lg" />
+  <div v-else class="bg-surface border-border/60 h-28 w-72 animate-pulse rounded-lg border motion-reduce:animate-none" />
 </template>

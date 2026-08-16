@@ -6,8 +6,13 @@ defineProps<{ friends: Friend[] }>()
 </script>
 
 <template>
-  <div class="bg-light-bg flex size-max items-center gap-2 rounded-lg p-2">
-    <Tooltip :text="friend.name" v-for="friend in friends" :key="friend.name" side="left">
+  <div class="bg-surface border-border/60 flex size-max items-center gap-2 rounded-lg border p-2 shadow-lg shadow-black/20">
+    <Tooltip
+      :text="friend.name"
+      v-for="friend in friends"
+      :key="friend.name"
+      side="left"
+      class="even:[&_img]:hover:-rotate-6">
       <a :href="friend.href" target="_blank">
         <img
           :src="`https://avatars.githubusercontent.com/u/${friend.githubID}`"
@@ -15,9 +20,5 @@ defineProps<{ friends: Friend[] }>()
           class="w-12 rounded-lg transition-[rotate] ease-in-out hover:rotate-6" />
       </a>
     </Tooltip>
-
-    <a href="https://leo.might-be.gay" target="_blank">
-      <img src="/leo_88x31.png" alt="leo" style="image-rendering: crisp-edges" class="h-[31px] w-[88px]" />
-    </a>
   </div>
 </template>

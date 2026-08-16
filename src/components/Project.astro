@@ -10,19 +10,19 @@ const { project } = Astro.props
 ---
 
 <a
-  class="group bg-light-bg relative h-28 w-72 rounded-lg shadow-lg shadow-black/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-xl hover:shadow-black/40 focus-visible:outline-2 focus-visible:outline-white motion-reduce:hover:translate-y-0"
+  class="group bg-surface border-border/60 relative min-h-28 w-72 overflow-hidden rounded-lg border pb-3 shadow-lg shadow-black/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface-raised hover:shadow-xl hover:shadow-black/40 focus-visible:outline-2 focus-visible:outline-primary motion-reduce:hover:translate-y-0"
   href={project.href}
   target="_blank">
   <div class="flex items-center justify-between px-3 pt-3">
     <div class="flex items-center justify-between gap-2">
       <Icon name={project.icon} size="1.5em" />
-      <h1 class="text-lg">{project.name}</h1>
+      <h3 class="text-lg">{project.name}</h3>
     </div>
-    <img src="/github.svg" alt="GitHub" class="w-5 opacity-30" />
+    <img src="/github.svg" alt="GitHub" class="w-5 opacity-30 transition-opacity group-hover:opacity-60" />
   </div>
-  <div class="mt-1 px-3 text-sm text-white/70">{project.description}</div>
+  <div class="text-muted mt-1 px-3 text-sm">{project.description}</div>
   <div
-    class="absolute bottom-0 h-1.5 w-full rounded-b-lg transition-all group-hover:brightness-125"
+    class="absolute bottom-0 h-1 w-full transition-all group-hover:brightness-125"
     style={`background-color: ${project.colour}`}>
   </div>
 </a>

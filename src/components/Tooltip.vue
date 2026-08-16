@@ -1,24 +1,37 @@
 <script setup lang="ts">
-import { ref, useTemplateRef } from "vue"
+import { nextTick, ref, useTemplateRef } from "vue"
 import { useMousePosition } from "../composables/useMousePosition"
 
 const { x, y } = useMousePosition()
 const tooltip = useTemplateRef("tooltip")
-const isHovered = ref<boolean>(false)
-const { side = "right" } = defineProps<{ text: string; side?: "left" | "right" }>()
+const trigger = useTemplateRef("trigger")
+const isShown = ref<boolean>(false)
+const { side = "right", focusable = false } = defineProps<{ text: string; side?: "left" | "right"; focusable?: boolean }>()
 
-const onHover = () => {
+const place = (left: number, top: number) => {
   if (!tooltip.value) return
-  const style = tooltip.value.style
-  style.left = `${x.value - (side === "left" ? 70 : -30)}px`
-  style.top = `${y.value - 10}px`
+  tooltip.value.style.left = `${left}px`
+  tooltip.value.style.top = `${top}px`
 }
+
+const onHover = () => place(x.value - (side === "left" ? 70 : -30), y.value - 10)
 
 const onMouseEnter = () => {
-  isHovered.value = true
+  isShown.value = true
 }
 const onMouseLeave = () => {
-  isHovered.value = false
+  isShown.value = false
+}
+
+const onFocusIn = async () => {
+  isShown.value = true
+  await nextTick()
+  const rect = trigger.value?.getBoundingClientRect()
+  if (!rect) return
+  place(side === "left" ? rect.left - 70 : rect.right + 10, rect.bottom + 8)
+}
+const onFocusOut = () => {
+  isShown.value = false
 }
 </script>
 
@@ -26,13 +39,23 @@ const onMouseLeave = () => {
   <div>
     <Transition>
       <span
-        v-if="isHovered"
+        v-if="isShown"
         ref="tooltip"
-        class="bg-light-bg pointer-events-none fixed z-1000 rounded-lg px-3 py-1 font-semibold text-white transition-opacity duration-100 select-none">
+        role="tooltip"
+        class="bg-surface-raised border-border pointer-events-none fixed z-1000 rounded-lg border px-3 py-1 font-semibold text-white transition-opacity duration-100 select-none">
         {{ text }}
       </span>
     </Transition>
-    <span @mousemove="onHover" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+    <span
+      ref="trigger"
+      :tabindex="focusable ? 0 : undefined"
+      :aria-label="focusable ? text : undefined"
+      class="focus-visible:outline-primary rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2"
+      @mousemove="onHover"
+      @mouseenter="onMouseEnter"
+      @mouseleave="onMouseLeave"
+      @focusin="onFocusIn"
+      @focusout="onFocusOut">
       <slot />
     </span>
   </div>
