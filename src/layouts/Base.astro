@@ -6,10 +6,7 @@ interface Props {
   description?: string
 }
 
-const {
-  title = "itswilli",
-  description = "Willi — Discord bots, image hosts, and other small things."
-} = Astro.props
+const { title = "itswilli.dev", description } = Astro.props
 
 const site = "https://itswilli.dev"
 const ogImage = `${site}/milo.jpg`
@@ -23,18 +20,16 @@ const ogImage = `${site}/milo.jpg`
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
 
-    <meta name="description" content={description} />
+    {description && <meta name="description" content={description} />}
     <meta name="theme-color" content="#a06bff" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={new URL(Astro.url.pathname, site).href} />
 
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
   </head>
   <body class="flex flex-col">

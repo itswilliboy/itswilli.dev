@@ -11,6 +11,9 @@ export default defineConfig({
   integrations: [vue(), icon()],
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      allowedHosts: true
+    }
   }
 })
