@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM oven/bun:1.3.9 AS build
 WORKDIR /app
 
@@ -5,7 +6,7 @@ COPY bun.lock package.json ./
 RUN bun install --frozen-lockfile
 
 COPY . .
-RUN bun run build
+RUN --mount=type=secret,id=github_token,env=GITHUB_TOKEN bun run build
 
 FROM oven/bun:1.3.9 AS run
 WORKDIR /app

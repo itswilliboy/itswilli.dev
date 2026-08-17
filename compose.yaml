@@ -2,7 +2,13 @@ services:
   astro:
     build:
       context: .
+      secrets:
+        - github_token
     ports:
       - ${ASTRO_PORT:-3007}:3000
     env_file:
       - .env
+
+secrets:
+  github_token:
+    environment: GITHUB_TOKEN
