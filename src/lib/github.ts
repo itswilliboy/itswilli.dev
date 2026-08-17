@@ -11,9 +11,7 @@ const PINNED_REPOS_QUERY = `
             name
             description
             url
-            homepageUrl
             stargazerCount
-            forkCount
             primaryLanguage {
               name
               color
@@ -32,12 +30,12 @@ export const getPinnedRepos = async () => {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       query: PINNED_REPOS_QUERY,
-      variables: { username: GITHUB_USERNAME },
-    }),
+      variables: { username: GITHUB_USERNAME }
+    })
   })
 
   if (!resp.ok) throw new Error(`GitHub responded with ${resp.status}`)

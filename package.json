@@ -13,6 +13,7 @@
     "@astrojs/vue": "^7.0.2",
     "@fontsource-variable/noto-sans-jp": "^5.2.9",
     "@iconify-json/skill-icons": "^1.2.0",
+    "@iconify-json/lucide": "^1.2.0",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^7.2.2",
     "astro-icon": "^1.1.5",
