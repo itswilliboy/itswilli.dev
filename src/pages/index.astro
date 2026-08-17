@@ -4,7 +4,10 @@ import NowPlaying from "../components/NowPlaying.vue"
 import Project from "../components/Project.astro"
 import Tooltip from "../components/Tooltip.vue"
 import Base from "../layouts/Base.astro"
-import type { Friend, Project as ProjectType } from "../types"
+import { getPinnedRepos } from "../lib/github"
+import type { Friend } from "../types"
+
+const repos = await getPinnedRepos()
 
 const socials = [
   {
@@ -14,30 +17,6 @@ const socials = [
   {
     href: "https://discord.com/users/263602820496883712",
     name: "discord"
-  }
-]
-
-const projects: ProjectType[] = [
-  {
-    name: "Harmony",
-    description: "Harmony is a multipurpose Discord Bot built in Python using discord.py",
-    href: "https://github.com/itswilliboy/Harmony",
-    colour: "#3573A6",
-    icon: "skill-icons:python-dark"
-  },
-  {
-    name: "itswilli.dev",
-    description: "This site. Built with Astro and Vue using TailwindCSS",
-    href: "https://github.com/itswilliboy/itswilli.dev",
-    colour: "#BC52EE",
-    icon: "skill-icons:astro"
-  },
-  {
-    name: "meteorite",
-    description: "A small image host written in Go, available at i.itswilli.dev",
-    href: "https://github.com/itswilliboy/meteorite",
-    colour: "#00ADD8",
-    icon: "skill-icons:golang"
   }
 ]
 
@@ -121,7 +100,7 @@ const friends: Friend[] = [
       <NowPlaying client:load class="mx-auto mt-8 block w-72 md:absolute md:top-24 md:right-4 md:mx-0 md:mt-0" />
 
       <div class="mt-8 flex flex-col items-center justify-center gap-4 lg:flex-row">
-        {projects.map(project => <Project project={project} />)}
+        {repos.map((repo: any) => <Project repo={repo} />)}
       </div>
 
       <Friends client:load friends={friends} class="mt-8 self-center md:absolute md:top-4 md:right-4 md:mt-0" />

@@ -29,10 +29,15 @@ export type Friend = {
   githubID: number
 }
 
-export type Project = {
+export type Repo = {
   name: string
-  description: string
-  href: string
-  colour: string
-  icon: string
+  description: Option<string>
+  url: string
+  homepageUrl: Option<string>
+  stargazerCount: number
+  forkCount: number
+  primaryLanguage: Option<{
+    name: string
+    color: Option<string>
+  }>
 }
